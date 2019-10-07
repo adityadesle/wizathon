@@ -24,9 +24,9 @@ args = vars(ap.parse_args())
 # load the image
 image = cv2.imread(args["image"])
 output = image.copy()
- 
+
 # pre-process the image for classification
-image = cv2.resize(image, (150, 150))
+image = cv2.resize(image, (224, 224))
 image = image.astype("float") / 255.0
 image = img_to_array(image)
 image = np.expand_dims(image, axis=0)
@@ -53,7 +53,7 @@ label = "{}: {:.2f}% ".format(label, proba[idx] * 100)
 output = imutils.resize(output, width=400)
 cv2.putText(output, label, (10, 25),  cv2.FONT_HERSHEY_SIMPLEX,
 	0.7, (0, 255, 0), 2)
-
+print("The classified inage is a :: ",label)
 # show the output image
 print("[INFO] {}".format(label))
 cv2.imshow("Output", output)
